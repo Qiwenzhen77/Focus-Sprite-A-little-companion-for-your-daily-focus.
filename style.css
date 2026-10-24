@@ -1,0 +1,2739 @@
+/* ========================================
+
+   FOCUS SPRITE
+
+   Visual design and animations
+
+\======================================== */
+
+
+
+:root {
+
+  \--night: #100e25;
+
+  \--lavender: #c9b7ff;
+
+  \--lavender-light: #e8dfff;
+
+  \--purple: #8e79d9;
+
+  \--muted: #aaa1c9;
+
+  \--glass: rgba(31, 25, 57, 0.82);
+
+  \--border: rgba(231, 221, 255, 0.15);
+
+  \--gold: #f3d58a;
+
+}
+
+
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+
+
+html,
+
+body {
+
+  width: 100%;
+
+  min-height: 100%;
+
+  margin: 0;
+
+}
+
+
+
+body {
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  font-family:
+
+    -apple-system, BlinkMacSystemFont,
+
+    "Segoe UI", sans-serif;
+
+  color: #f7f3ff;
+
+  background: var(--night);
+
+}
+
+
+
+button,
+
+input,
+
+select {
+
+  font: inherit;
+
+}
+
+
+
+button {
+
+  cursor: pointer;
+
+}
+
+
+
+button:focus-visible,
+
+input:focus-visible,
+
+select:focus-visible,
+
+.sprite:focus-visible {
+
+  outline: 2px solid var(--lavender-light);
+
+  outline-offset: 4px;
+
+}
+
+
+
+/* Starry background */
+
+
+
+.stars {
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+
+    radial-gradient(
+
+      ellipse at 50% 42%,
+
+      rgba(91, 68, 151, 0.32),
+
+      transparent 55%
+
+    ),
+
+    radial-gradient(
+
+      circle at 15% 20%,
+
+      rgba(150, 130, 219, 0.13),
+
+      transparent 30%
+
+    ),
+
+    radial-gradient(
+
+      circle at 85% 80%,
+
+      rgba(89, 116, 180, 0.12),
+
+      transparent 28%
+
+    );
+
+}
+
+
+
+.stars::before,
+
+.stars::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+
+    radial-gradient(1px 1px at 12% 24%, #fff 98%, transparent),
+
+    radial-gradient(2px 2px at 78% 16%, #e4d8ff 98%, transparent),
+
+    radial-gradient(1px 1px at 60% 64%, #fff 98%, transparent),
+
+    radial-gradient(1px 1px at 32% 78%, #d6caff 98%, transparent),
+
+    radial-gradient(2px 2px at 91% 54%, #fff 98%, transparent),
+
+    radial-gradient(1px 1px at 45% 35%, #fff 98%, transparent),
+
+    radial-gradient(1px 1px at 22% 63%, #d6caff 98%, transparent);
+
+  background-size: 320px 290px;
+
+  animation: twinkle 5s ease-in-out infinite alternate;
+
+}
+
+
+
+.stars::after {
+
+  transform: scale(1.2);
+
+  opacity: 0.35;
+
+  animation-delay: -2s;
+
+}
+
+
+
+@keyframes twinkle {
+
+  from {
+
+    opacity: 0.35;
+
+  }
+
+
+
+  to {
+
+    opacity: 0.9;
+
+  }
+
+}
+
+
+
+/* Header */
+
+
+
+.topbar {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 27px 38px;
+
+}
+
+
+
+.brand {
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color: #e8deff;
+
+}
+
+
+
+.clock {
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  letter-spacing: 1.5px;
+
+}
+
+
+
+/* Main desktop */
+
+
+
+.desktop {
+
+  position: relative;
+
+  min-height: calc(100vh - 120px);
+
+}
+
+
+
+/* Welcome text */
+
+
+
+.welcome {
+
+  position: absolute;
+
+  top: 19%;
+
+  left: 12%;
+
+  max-width: 360px;
+
+  animation: fade-in 1s ease both;
+
+  transition:
+
+    opacity 0.4s,
+    top 0.9s ease,
+    left 0.9s ease,
+    width 0.9s ease,
+
+    transform 0.9s ease;
+
+}
+
+
+
+.welcome.hidden {
+
+  opacity: 0;
+
+  transform: translateY(-12px);
+
+  pointer-events: none;
+
+}
+
+
+
+.eyebrow {
+
+  margin: 0 0 13px;
+
+  color: #b6a5ee;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2.2px;
+
+}
+
+
+
+.welcome h1 {
+
+  margin: 0;
+
+  max-width: 340px;
+
+  font-size: clamp(34px, 4vw, 54px);
+
+  line-height: 1.15;
+
+  font-weight: 500;
+
+  letter-spacing: -2px;
+
+}
+
+
+
+.welcome > p:not(.eyebrow) {
+
+  max-width: 290px;
+
+  margin: 18px 0 26px;
+
+  color: #bdb5d7;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+}
+
+
+
+.welcome button {
+
+  padding: 12px 18px;
+
+  border: 1px solid rgba(230, 218, 255, 0.35);
+
+  border-radius: 30px;
+
+  color: #f5f0ff;
+
+  background: rgba(199, 180, 255, 0.13);
+
+  transition: *background* 0.25s, transform 0.25s;
+
+}
+
+
+
+.welcome button:hover {
+
+  transform: translateY(-2px);
+
+  background: rgba(199, 180, 255, 0.24);
+
+}
+
+
+
+.welcome button span {
+
+  margin-left: 15px;
+
+  color: var(--lavender);
+
+}
+
+
+
+/* Sprite */
+
+
+
+.sprite {
+
+  position: fixed;
+
+  z-index: 5;
+
+  left: 76%;
+
+  top: 53%;
+
+  width: 100px;
+
+  height: 112px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+
+    left 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+
+    top 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+
+    filter 0.3s;
+
+  animation: sprite-float 3.5s ease-in-out infinite;
+
+}
+
+
+
+.sprite:hover {
+
+  filter: brightness(1.12);
+
+}
+
+
+
+.sprite-glow {
+
+  position: absolute;
+
+  width: 100px;
+
+  height: 100px;
+
+  border-radius: 50%;
+
+  background: rgba(165, 138, 255, 0.18);
+
+  filter: blur(23px);
+
+  animation: glow-breathe 3s ease-in-out infinite;
+
+}
+
+
+
+.sprite-body {
+
+  position: relative;
+
+  z-index: 1;
+
+  width: 72px;
+
+  height: 67px;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: 45% 45% 39% 39%;
+
+  background:
+
+    radial-gradient(
+
+      circle at 32% 20%,
+
+      #fff 0%,
+
+      #f0eaff 18%,
+
+      #c7b7ff 55%,
+
+      #8e7ad5 100%
+
+    );
+
+  box-shadow:
+
+    inset -9px -10px 16px rgba(84, 60, 156, 0.22),
+
+    0 0 20px rgba(195, 176, 255, 0.4);
+
+}
+
+
+
+.sprite-body::before,
+
+.sprite-body::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: -8px;
+
+  width: 22px;
+
+  height: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 50% 50% 35% 35%;
+
+  background: linear-gradient(145deg, #e7ddff, #a695ec);
+
+}
+
+
+
+.sprite-body::before {
+
+  left: 7px;
+
+  transform: rotate(-18deg);
+
+}
+
+
+
+.sprite-body::after {
+
+  right: 7px;
+
+  transform: rotate(18deg);
+
+}
+
+
+
+.sprite-face {
+
+  position: absolute;
+
+  top: 27px;
+
+  left: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+
+}
+
+
+
+.eye {
+
+  width: 5px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #43355f;
+
+}
+
+
+
+.cheek {
+
+  position: absolute;
+
+  top: 10px;
+
+  width: 10px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #f49fc5;
+
+  opacity: 0.8;
+
+}
+
+
+
+.cheek-left {
+
+  left: 13px;
+
+}
+
+
+
+.cheek-right {
+
+  right: 13px;
+
+}
+
+
+
+.sprite-shadow {
+
+  position: absolute;
+
+  bottom: 11px;
+
+  width: 48px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: rgba(4, 3, 18, 0.3);
+
+  filter: blur(5px);
+
+}
+
+
+
+.sprite-caption {
+
+  position: absolute;
+
+  top: 108px;
+
+  width: 160px;
+
+  text-align: center;
+
+  color: #bcb0e5;
+
+  font-size: 10px;
+
+  letter-spacing: 0.8px;
+
+  opacity: 0.8;
+
+  transition: opacity 0.3s;
+
+}
+
+
+
+.sprite:hover .sprite-caption {
+
+  opacity: 1;
+
+}
+
+
+
+.sprite.moving {
+
+  animation: sprite-wiggle 0.3s ease-in-out infinite;
+
+}
+
+
+
+.sprite.moving .sprite-body {
+
+  box-shadow:
+
+    inset -9px -10px 16px rgba(84, 60, 156, 0.22),
+
+    0 0 32px rgba(216, 200, 255, 0.85);
+
+}
+
+
+
+.sprite.celebrating .sprite-body {
+
+  animation: celebrate 0.45s ease-in-out 3;
+
+}
+
+
+
+@keyframes sprite-float {
+
+  0%, 100% {
+
+    translate: 0 0;
+
+  }
+
+
+
+  50% {
+
+    translate: 0 -11px;
+
+  }
+
+}
+
+
+
+@keyframes sprite-wiggle {
+
+  0%, 100% {
+
+    rotate: -4deg;
+
+  }
+
+
+
+  50% {
+
+    rotate: 4deg;
+
+  }
+
+}
+
+
+
+@keyframes glow-breathe {
+
+  0%, 100% {
+
+    transform: scale(0.85);
+
+    opacity: 0.6;
+
+  }
+
+
+
+  50% {
+
+    transform: scale(1.2);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+
+@keyframes celebrate {
+
+  0%, 100% {
+
+    transform: translateY(0) rotate(0);
+
+  }
+
+
+
+  50% {
+
+    transform: translateY(-15px) rotate(8deg);
+
+  }
+
+}
+
+
+
+/* Task dock */
+
+
+
+.taskbar {
+
+  position: fixed;
+
+  z-index: 4;
+
+  left: 50%;
+
+  bottom: 27px;
+
+  width: min(570px, calc(100vw - 30px));
+
+  max-height: 65vh;
+
+  overflow-y: auto;
+
+  padding: 22px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 23px;
+
+  background: var(--glass);
+
+  box-shadow:
+
+    0 24px 90px rgba(0, 0, 0, 0.35),
+
+    inset 0 1px rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(24px);
+
+  -webkit-backdrop-filter: blur(24px);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: translate(-50%, 25px) scale(0.97);
+
+  transition:
+
+    opacity 0.3s,
+
+    transform 0.3s,
+
+    visibility 0.3s;
+
+}
+
+
+
+.taskbar.open {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translate(-50%, 0) scale(1);
+
+}
+
+
+
+.taskbar-top,
+
+.planner-heading {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+}
+
+
+
+.taskbar h2,
+
+.planner-card h2 {
+
+  margin: 0;
+
+  font-size: 21px;
+
+  font-weight: 500;
+
+  letter-spacing: -0.5px;
+
+}
+
+
+
+.icon-button {
+
+  width: 32px;
+
+  height: 32px;
+
+  padding: 0;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: #ded5f5;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  font-size: 21px;
+
+  line-height: 1;
+
+}
+
+
+
+.icon-button:hover {
+
+  background: rgba(255, 255, 255, 0.13);
+
+}
+
+
+
+.task-summary {
+
+  margin-top: 14px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+}
+
+
+
+.task-list {
+
+  margin-top: 12px;
+
+}
+
+
+
+.empty-state {
+
+  padding: 20px 12px;
+
+  border: 1px dashed rgba(220, 205, 255, 0.2);
+
+  border-radius: 15px;
+
+  color: #bcb2d9;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  text-align: center;
+
+}
+
+
+
+.task-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 13px 14px;
+
+  margin-top: 8px;
+
+  border: 1px solid rgba(231, 221, 255, 0.1);
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+}
+
+
+
+.task-row\.completed {
+
+  opacity: 0.6;
+
+}
+
+
+
+.task-details {
+
+  min-width: 0;
+
+}
+
+
+
+.task-name {
+
+  overflow-wrap: anywhere;
+
+  font-size: 13px;
+
+}
+
+
+
+.task-meta {
+
+  margin-top: 5px;
+
+  color: #aaa0c7;
+
+  font-size: 11px;
+
+}
+
+
+
+.task-row\.completed .task-name {
+
+  text-decoration: line-through;
+
+}
+
+
+
+.done-button {
+
+  flex-shrink: 0;
+
+  padding: 8px 11px;
+
+  border: 1px solid rgba(210, 195, 255, 0.22);
+
+  border-radius: 20px;
+
+  color: #e8deff;
+
+  background: rgba(186, 162, 255, 0.12);
+
+  font-size: 11px;
+
+}
+
+
+
+.done-button:hover {
+
+  background: rgba(186, 162, 255, 0.24);
+
+}
+
+
+
+.done-button:disabled {
+
+  cursor: default;
+
+  opacity: 0.7;
+
+}
+
+
+
+.taskbar-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 17px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(231, 221, 255, 0.1);
+
+}
+
+
+
+.primary-button {
+
+  padding: 11px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 24px;
+
+  color: #261d42;
+
+  background: linear-gradient(135deg, #eee5ff, #c6b2ff);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  transition: transform 0.2s, filter 0.2s;
+
+}
+
+
+
+.primary-button:hover {
+
+  transform: translateY(-1px);
+
+  filter: brightness(1.08);
+
+}
+
+
+
+.star-count {
+
+  color: var(--gold);
+
+  font-size: 12px;
+
+}
+
+
+
+/* Planner overlay */
+.planner-overlay {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: rgba(9, 7, 25, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s, visibility 0.25s;
+}
+.planner-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.planner-card {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  margin: auto;
+  padding: 28px;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #211a3b;
+  box-shadow: 0 25px 100px rgba(0, 0, 0, 0.45);
+  transform: translateY(12px);
+  transition: transform 0.3s;
+}
+.planner-overlay.open .planner-card { transform: translateY(0); }
+.planner-card .eyebrow { margin: 0 0 12px; }
+.planner-card h2 { margin: 0 0 10px; font-size: 24px; line-height: 1.3; }
+.planner-description {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+#taskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+#taskForm label {
+  display: block;
+  margin: 8px 0 0;
+  color: #d5cbea;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#taskForm input,
+#taskForm select {
+  display: block;
+  position: static;
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid rgba(231, 221, 255, 0.17);
+  border-radius: 11px;
+  outline: none;
+  color: #f7f3ff;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 13px;
+}
+#taskForm input::placeholder { color: #857b9e; }
+#taskForm input:focus,
+#taskForm select:focus { border-color: #bca8ff; }
+#taskForm select option { color: #f7f3ff; background: #211a3b; }
+#taskForm .form-error {
+  min-height: 16px;
+  margin: 4px 0 0;
+  color: #ffb5cb;
+  font-size: 12px;
+}
+#taskForm .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+#taskForm .form-actions button {
+  position: static;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+}
+#taskForm .secondary-button {
+  padding: 11px 15px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  color: #e8deff;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+#taskForm .secondary-button:hover { background: rgba(255, 255, 255, 0.12); }
+#taskForm .primary-button { padding: 12px 16px; font-size: 12px; }
+@media (max-width: 600px) {
+  .planner-overlay { padding: 16px; }
+  .planner-card {
+    width: 100%;
+    max-height: calc(100vh - 32px);
+    padding: 22px 20px;
+  }
+  #taskForm .form-actions { justify-content: stretch; }
+  #taskForm .form-actions button { flex: 1 1 auto; }
+}
+
+/* Toast feedback */
+
+
+
+.toast {
+
+  position: fixed;
+
+  z-index: 20;
+
+  left: 50%;
+
+  bottom: 28px;
+
+  max-width: calc(100vw - 32px);
+
+  padding: 12px 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 30px;
+
+  color: #f5efff;
+
+  background: #30264d;
+
+  box-shadow: 0 10px 35px #0004;
+
+  font-size: 12px;
+
+  text-align: center;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform: translate(-50%, 12px);
+
+  transition: opacity 0.25s, transform 0.25s;
+
+}
+
+
+
+.toast.show {
+
+  opacity: 1;
+
+  transform: translate(-50%, 0);
+
+}
+
+
+
+/* Footer */
+
+
+
+.footer-note {
+
+  position: fixed;
+
+  right: 30px;
+
+  bottom: 20px;
+
+  z-index: 1;
+
+  color: rgba(201, 191, 237, 0.5);
+
+  font-size: 9px;
+
+  letter-spacing: 1.5px;
+
+  pointer-events: none;
+
+}
+
+
+
+/* Small screens */
+
+
+
+@media (max-width: 650px) {
+
+  .topbar {
+
+    padding: 22px;
+
+  }
+
+
+
+  .brand {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+  }
+
+
+
+  .clock {
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+
+  }
+
+
+
+  .welcome {
+
+    top: 13%;
+
+    left: 8%;
+
+    max-width: 270px;
+
+  }
+
+
+
+  .welcome h1 {
+
+    font-size: 38px;
+
+  }
+
+
+
+  .sprite {
+
+    left: 72%;
+
+    top: 49%;
+
+    scale: 0.85;
+
+  }
+
+
+
+  .taskbar {
+
+    bottom: 14px;
+
+    padding: 17px;
+
+  }
+
+
+
+  .taskbar h2,
+
+  .planner-card h2 {
+
+    font-size: 19px;
+
+  }
+
+
+
+  .planner-card {
+
+    padding: 22px;
+
+  }
+
+
+
+  .footer-note {
+
+    display: none;
+
+  }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+
+  *::before,
+
+  *::after {
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+
+  }
+
+}
+
+
+
+/* First-time tutorial bubble */
+
+.tutorial-bubble {
+
+  position: fixed;
+
+  right: 7%;
+
+  top: calc(42% - 145px);
+
+  z-index: 50;
+
+  width: min(290px, calc(100vw - 40px));
+
+  padding: 18px;
+
+  border: 1px solid rgba(220, 205, 255, 0.3);
+
+  border-radius: 20px;
+
+  background: rgba(29, 24, 64, 0.88);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+
+  color: #f5efff;
+
+  animation: tutorialAppear 0.35s ease both;
+
+}
+
+
+
+.tutorial-bubble p {
+
+  margin: 0 0 14px;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+}
+
+
+
+.tutorial-bubble button {
+
+  border: 1px solid rgba(220, 205, 255, 0.3);
+
+  border-radius: 12px;
+
+  padding: 10px 14px;
+
+  background: linear-gradient(135deg, #a99aff, #d1aaff);
+
+  color: #211744;
+
+  font: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+
+}
+
+
+
+.tutorial-bubble button:hover {
+
+  transform: translateY(-2px);
+
+}
+
+
+
+.tutorial-bubble.hidden {
+
+  display: none;
+
+}
+
+
+
+@keyframes tutorialAppear {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(8px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+
+@media (max-width: 600px) {
+
+  .tutorial-bubble {
+
+    right: 20px;
+
+    top: auto;
+
+    bottom: 180px;
+
+  }
+
+}
+
+
+
+/* Refined footer */
+
+.page-footer {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 16px;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+
+  max-width: calc(100vw - 32px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  color: rgba(225, 216, 255, 0.48);
+
+  font-size: 11px;
+
+  letter-spacing: 1.2px;
+
+  text-align: center;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+}
+
+
+
+.page-footer span:last-child {
+
+  color: rgba(193, 167, 255, 0.8);
+
+  font-size: 14px;
+
+}
+
+
+
+@media (max-width: 600px) {
+
+  .page-footer {
+
+    bottom: 10px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.7px;
+
+  }
+
+}
+
+
+
+/* Smoother sprite movement */
+
+.sprite {
+
+  transition:
+
+    left 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+
+    right 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+
+    top 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+
+}
+
+
+
+.sprite.moving {
+
+  z-index: 20;
+
+}
+
+
+
+/* Slower, softer character animation */
+
+.sprite-body {
+
+  animation-duration: 5s !important;
+
+  animation-timing-function: ease-in-out !important;
+
+}
+
+
+
+.sprite-glow {
+
+  animation-duration: 6s !important;
+
+  animation-timing-function: ease-in-out !important;
+
+}
+
+
+
+/* Make tutorial text easier to read */
+
+.tutorial-bubble {
+
+  animation: tutorialAppear 0.8s ease both;
+
+  line-height: 1.8;
+
+}
+
+
+
+.tutorial-bubble p {
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  margin-bottom: 18px;
+
+}
+
+
+
+.tutorial-bubble button {
+
+  min-height: 42px;
+
+  padding: 11px 16px;
+
+}
+
+
+
+/* ===== Focus Sprite: calm and stable layout ===== */
+
+
+
+/* Stop the sprite from constantly moving */
+
+.sprite-body,
+
+.sprite-glow {
+
+  animation: none !important;
+
+}
+
+
+
+/* Keep the sprite still while it moves between positions */
+
+.sprite,
+
+.sprite.moving {
+
+  animation: none !important;
+
+}
+
+
+
+/* Tutorial bubble: stable, readable, beside the sprite */
+
+.tutorial-bubble {
+
+  position: fixed;
+
+  top: 28%;
+
+  right: calc(7% + 150px);
+
+  left: auto;
+
+  bottom: auto;
+
+
+
+  width: min(280px, calc(100vw - 40px));
+
+  padding: 18px;
+
+
+
+  background: rgba(29, 24, 64, 0.96);
+
+  border: 1px solid rgba(220, 205, 255, 0.3);
+
+  border-radius: 18px;
+
+
+
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+
+
+
+  animation: none !important;
+
+  transform: none !important;
+
+  transition: none !important;
+
+
+
+  z-index: 50;
+
+}
+
+
+
+.tutorial-bubble p {
+
+  margin: 0 0 16px;
+
+  color: #f5efff;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+}
+
+
+
+.tutorial-bubble button {
+
+  min-height: 42px;
+
+  padding: 11px 16px;
+
+}
+
+
+
+/* Hidden means fully hidden */
+
+.tutorial-bubble.hidden {
+
+  display: none !important;
+
+}
+
+
+
+/* On smaller screens, keep the tutorial near the top */
+
+@media (max-width: 600px) {
+
+  .tutorial-bubble {
+
+    top: 100px;
+
+    right: 20px;
+
+    left: 20px;
+
+    bottom: auto;
+
+    width: auto;
+
+  }
+
+}
+
+
+
+/* ===== Refined tutorial speech bubble ===== */
+
+
+
+.tutorial-bubble {
+
+  position: fixed;
+
+
+
+  /* Place the bubble beside the sprite */
+
+  top: 28%;
+
+  right: calc(7% + 145px);
+
+  left: auto;
+
+  bottom: auto;
+
+
+
+  width: min(280px, calc(100vw - 40px));
+
+  padding: 20px;
+
+
+
+  background: linear-gradient(
+
+    145deg,
+
+    rgba(49, 42, 81, 0.97),
+
+    rgba(28, 25, 58, 0.97)
+
+  );
+
+
+
+  border: 1px solid rgba(208, 192, 255, 0.32);
+
+  border-radius: 20px;
+
+
+
+  box-shadow:
+
+    0 12px 32px rgba(8, 6, 30, 0.25),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+
+
+  backdrop-filter: blur(16px);
+
+  -webkit-backdrop-filter: blur(16px);
+
+
+
+  animation: none !important;
+
+  transform: none !important;
+
+  transition: none !important;
+
+
+
+  z-index: 50;
+
+}
+
+
+
+/* Small pointer facing the sprite */
+
+.tutorial-bubble::after {
+
+  content: "";
+
+  position: absolute;
+
+
+
+  top: 34px;
+
+  right: -8px;
+
+
+
+  width: 14px;
+
+  height: 14px;
+
+
+
+  background: #302949;
+
+  border-top: 1px solid rgba(208, 192, 255, 0.32);
+
+  border-right: 1px solid rgba(208, 192, 255, 0.32);
+
+
+
+  transform: rotate(45deg);
+
+}
+
+
+
+/* Readable tutorial text */
+
+.tutorial-bubble p {
+
+  position: relative;
+
+  z-index: 1;
+
+
+
+  margin: 0 0 18px;
+
+  color: #F5EFFF;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+}
+
+
+
+/* Calm, consistent button */
+
+.tutorial-bubble button {
+
+  position: relative;
+
+  z-index: 1;
+
+
+
+  min-height: 42px;
+
+  padding: 11px 15px;
+
+
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(220, 205, 255, 0.2);
+
+
+
+  background: linear-gradient(135deg, #C8B8FF, #B6A0F3);
+
+  color: #292044;
+
+
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+
+.tutorial-bubble button:hover {
+
+  filter: brightness(1.06);
+
+}
+
+
+
+.tutorial-bubble.hidden {
+
+  display: none !important;
+
+}
+
+
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+
+  .tutorial-bubble {
+
+    top: 100px;
+
+    right: 20px;
+
+    left: 20px;
+
+    bottom: auto;
+
+    width: auto;
+
+  }
+
+
+
+  /* Point upward on narrow screens */
+
+  .tutorial-bubble::after {
+
+    top: -8px;
+
+    right: 28px;
+
+    transform: rotate(-45deg);
+
+  }
+
+}
+
+
+
+/* Let JavaScript position the tutorial next to the sprite */
+
+.tutorial-bubble {
+
+  position: fixed;
+
+  right: auto;
+
+  bottom: auto;
+
+  margin: 0;
+
+}
+
+
+
+/* Arrow points toward the sprite on the right */
+
+.tutorial-bubble::after {
+
+  top: 34px;
+
+  right: -8px;
+
+  left: auto;
+
+  transform: rotate(45deg);
+
+}
+
+
+
+/* Avoid conflicting mobile positioning */
+
+@media (max-width: 600px) {
+
+  .tutorial-bubble {
+
+    right: auto;
+
+    left: auto;
+
+    top: auto;
+
+    bottom: auto;
+
+    width: min(280px, calc(100vw - 40px));
+
+  }
+
+}
+
+
+
+/* Focus Sprite: balanced hover layout */
+
+
+
+/* Move the page heading to the upper center */
+
+body.sprite-hover .welcome {
+
+  position: fixed;
+
+  top: 24px;
+
+  left: 50%;
+
+  right: auto;
+
+  width: max-content;
+
+  max-width: 90vw;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  z-index: 30;
+
+  transition:
+
+    top 0.5s ease,
+
+    left 0.5s ease,
+
+    transform 0.5s ease;
+
+}
+
+
+
+
+
+
+
+/* ===== Focus Sprite: refined hover layout ===== */
+
+
+
+/* Elegant centered brand heading */
+
+body.sprite-hover .welcome {
+
+  position: fixed;
+
+  top: 24px;
+
+  left: 50%;
+
+  right: auto;
+
+  width: min(90vw, 520px);
+
+  margin: 0;
+
+  padding: 0;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  z-index: 60;
+
+  transition: top 0.45s ease, opacity 0.35s ease;
+
+}
+
+
+
+/* Main title */
+
+body.sprite-hover .welcome h1 {
+
+  margin: 0;
+
+  font-size: clamp(27px, 3vw, 38px);
+
+  line-height: 1.2;
+
+  letter-spacing: 1.5px;
+
+  font-weight: 600;
+
+  color: #F3EDFF;
+
+  text-shadow: 0 0 24px rgba(183, 151, 255, 0.24);
+
+}
+
+
+
+/* Subtitle */
+
+body.sprite-hover .welcome p {
+
+  margin: 9px 0 0;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  letter-spacing: 1.8px;
+
+  color: rgba(218, 205, 255, 0.68);
+
+}
+/* Simple centered title when the sprite moves */
+
+
+
+body.sprite-hover .welcome {
+
+  position: fixed;
+
+  top: 28px;
+
+  left: 50%;
+
+  right: auto;
+
+  width: min(90vw, 520px);
+
+  max-width: 90vw;
+
+  margin: 0;
+
+  padding: 0;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  z-index: 60;
+
+  transition: top 0.35s ease;
+
+}
+
+
+
+body.sprite-hover .welcome h1 {
+
+  margin: 0;
+
+  font-size: clamp(26px, 3vw, 36px);
+
+  line-height: 1.2;
+
+  font-weight: 500;
+
+  letter-spacing: -0.8px;
+
+}
+
+
+
+body.sprite-hover .welcome p {
+
+  margin: 8px 0 0;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  color: #bdb5d7;
+
+}
+
+
+
+body.sprite-hover .welcome button {
+
+  display: none;
+
+}
+
+
+
+@media (max-width: 700px) {
+
+  body.sprite-hover .welcome {
+
+    top: 20px;
+
+    width: 92vw;
+
+  }
+
+
+
+  body.sprite-hover .welcome h1 {
+
+    font-size: 26px;
+
+  }
+
+}
+
+/* ===== Centered welcome layout ===== */
+
+body.sprite-hover .welcome {
+
+  position: fixed;
+
+  top: 72px;
+
+  left: 50%;
+
+  right: auto;
+
+
+
+  width: min(90vw, 680px);
+
+  margin: 0;
+
+  padding: 0;
+
+
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  box-sizing: border-box;
+
+  z-index: 60;
+
+}
+
+
+
+/* Small heading */
+
+body.sprite-hover .welcome h2 {
+
+  margin: 0 0 18px;
+
+  text-align: center;
+
+}
+
+
+
+/* Main title */
+
+body.sprite-hover .welcome h1 {
+
+  max-width: 600px;
+
+  margin: 0 auto;
+
+
+
+  font-size: clamp(38px, 5vw, 62px);
+
+  line-height: 1.12;
+
+  font-weight: 600;
+
+  letter-spacing: -1.8px;
+
+
+
+  text-align: center;
+
+  text-wrap: balance;
+
+}
+
+
+
+/* Subtitle */
+
+body.sprite-hover .welcome p {
+
+  max-width: 520px;
+
+  margin: 22px auto 0;
+
+
+
+  font-size: 16px;
+
+  line-height: 1.7;
+
+  letter-spacing: 1.5px;
+
+
+
+  text-align: center;
+
+}
+
+
+
+/* Hide the original button in this state */
+
+body.sprite-hover .welcome button {
+
+  display: none;
+
+}
+
+
+
+@media (max-width: 700px) {
+
+  body.sprite-hover .welcome {
+
+    top: 48px;
+
+    width: 90vw;
+
+  }
+
+
+
+  body.sprite-hover .welcome h1 {
+
+    font-size: 38px;
+
+    letter-spacing: -1px;
+
+  }
+
+
+
+  body.sprite-hover .welcome p {
+
+    font-size: 14px;
+
+    letter-spacing: 0.8px;
+
+  }
+
+}
+
+body.sprite-hover .welcome p {
+
+  max-width: none;
+
+  width: max-content;
+
+  max-width: 90vw;
+
+  margin: 22px auto 0;
+
+  white-space: nowrap;
+
+  font-size: clamp(11px, 1.25vw, 16px);
+
+  letter-spacing: 1.5px;
+
+  text-align: center;
+
+}
+
+/* Fix Add a task modal overlapping the welcome title */
+
+/* Keep the planner above the welcome heading */
+.planner-overlay {
+  z-index: 1000;
+}
+
+/* Hide the welcome section whenever the planner is open */
+body:has(.planner-overlay.open) .welcome {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Keep the form inside its planner card */
+#plannerOverlay #taskForm {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+  margin: 0;
+}
+
+/* Keep every form field inside the card */
+#plannerOverlay .planner-card {
+  position: relative;
+  width: min(440px, 100%);
+  max-width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  margin: auto;
+}
+
+#plannerOverlay #taskForm input,
+#plannerOverlay #taskForm select {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 600px) {
+  #plannerOverlay .planner-card {
+    max-height: calc(100vh - 32px);
+  }
+}
+
+/* ========================================
+   FOCUS SPRITE — Slow & Smooth Motion
+======================================== */
+
+:root {
+  --motion-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --motion-duration: 0.7s;
+}
+
+/* 1. Smooth transitions across the interface */
+.welcome,
+.welcome button,
+.sprite,
+.sprite-body,
+.sprite-glow,
+.sprite-caption,
+.tutorial-bubble,
+.tutorial-bubble button,
+.taskbar,
+.planner-overlay,
+.planner-card,
+.primary-button,
+.icon-button,
+.done-button,
+.toast {
+  transition-timing-function: var(--motion-soft);
+}
+
+/* 2. Let the little sprite move more gently */
+.sprite {
+  transition:
+    left 1.4s var(--motion-soft),
+    right 1.4s var(--motion-soft),
+    top 1.4s var(--motion-soft),
+    filter 0.8s var(--motion-gentle);
+}
+
+.sprite-body {
+  transition:
+    box-shadow 0.9s var(--motion-gentle),
+    filter 0.9s var(--motion-gentle);
+}
+
+/* 3. Softer floating glow */
+.sprite-glow {
+  transition:
+    opacity 1.2s var(--motion-gentle),
+    transform 1.2s var(--motion-gentle);
+}
+
+/* 4. Slower star twinkling */
+.stars::before {
+  animation-duration: 9s;
+  animation-timing-function: ease-in-out;
+}
+
+.stars::after {
+  animation-duration: 12s;
+  animation-timing-function: ease-in-out;
+}
+
+/* 5. Gentle welcome title appearance */
+.welcome {
+  animation-duration: 1.5s;
+  animation-timing-function: var(--motion-soft);
+}
+
+body.sprite-hover .welcome {
+  transition:
+    top 0.9s var(--motion-soft),
+    left 0.9s var(--motion-soft),
+    transform 0.9s var(--motion-soft),
+    opacity 0.8s var(--motion-gentle);
+}
+
+/* 6. Slower taskbar opening and closing */
+.taskbar {
+  transition:
+    opacity 0.65s var(--motion-soft),
+    transform 0.85s var(--motion-soft),
+    visibility 0.65s;
+}
+
+/* 7. Smooth planner modal */
+.planner-overlay {
+  transition:
+    opacity 0.55s var(--motion-gentle),
+    visibility 0.55s;
+}
+
+.planner-card {
+  transition:
+    transform 0.7s var(--motion-soft),
+    opacity 0.7s var(--motion-soft);
+}
+
+/* 8. Gentle tutorial bubble */
+.tutorial-bubble {
+  animation-duration: 0.9s;
+}
+
+.tutorial-bubble button {
+  transition:
+    transform 0.45s var(--motion-soft),
+    filter 0.45s var(--motion-gentle),
+    background 0.45s var(--motion-gentle);
+}
+
+/* 9. Buttons respond softly */
+.primary-button,
+.icon-button,
+.done-button,
+.secondary-button {
+  transition:
+    transform 0.4s var(--motion-soft),
+    background 0.45s var(--motion-gentle),
+    filter 0.45s var(--motion-gentle);
+}
+
+/* 10. Toast fades in more naturally */
+.toast {
+  transition:
+    opacity 0.5s var(--motion-gentle),
+    transform 0.65s var(--motion-soft);
+}
+
+/* 11. Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Align stars counter with Add a task button */
+
+.taskbar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.star-counter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}

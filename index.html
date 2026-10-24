@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#11102b" />
+  <meta name="description" content="A little companion for your daily focus." />
+  <title>Focus Sprite — Your Little Focus Buddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Focus Sprite home">
+      <span class="brand-star">✦</span>
+      <span>FOCUS SPRITE</span>
+    </a>
+    <div id="clock" class="clock" aria-label="Current time">--:--</div>
+  </header>
+
+  <main>
+    <section class="welcome" id="welcome">
+      <p class="eyebrow">A LITTLE SPACE FOR YOURSELF</p>
+      <h1>A softer way<br />to focus.</h1>
+      <p class="welcome-description">
+        Small steps, gentle reminders, and a little friend along the way.
+      </p>
+      <button class="primary-button" id="openPlanner" type="button">
+        Plan a little goal <span aria-hidden="true">↗</span>
+      </button>
+    </section>
+
+    <div class="sprite" id="sprite" tabindex="0" role="button"
+         aria-label="Focus Sprite. Hover or activate to open your taskbar.">
+      <div class="sprite-glow"></div>
+      <div class="sprite-body">
+        <div class="sprite-ear sprite-ear-left"></div>
+        <div class="sprite-ear sprite-ear-right"></div>
+        <div class="sprite-face">
+          <span class="eye eye-left"></span>
+          <span class="eye eye-right"></span>
+          <span class="cheek cheek-left"></span>
+          <span class="cheek cheek-right"></span>
+          <span class="mouth"></span>
+        </div>
+        <span class="sprite-sparkle sparkle-one">✦</span>
+        <span class="sprite-sparkle sparkle-two">·</span>
+      </div>
+      <div class="sprite-shadow"></div>
+      <div class="sprite-caption">your little focus buddy</div>
+
+      <!-- First-time tutorial conversation -->
+      <div id="tutorialBubble" class="tutorial-bubble hidden"
+           role="status" aria-live="polite">
+        <p id="tutorialText"></p>
+        <button id="tutorialNext" type="button">
+          Let's get started
+        </button>
+      </div>
+    </div>
+
+    <section class="taskbar" id="taskbar" aria-label="Your tasks">
+      <div class="taskbar-header">
+        <div>
+          <p class="eyebrow">YOUR LITTLE CORNER</p>
+          <h2>Today's goals <span aria-hidden="true">✦</span></h2>
+          <p id="taskSummary" class="task-summary">
+            Your journey starts with one little goal.
+          </p>
+        </div>
+        <button id="closeDock" class="icon-button" type="button"
+                aria-label="Close taskbar">×</button>
+      </div>
+
+      <div id="taskList" class="task-list"></div>
+
+      <div class="taskbar-footer">
+        <button id="addTask" class="primary-button small-button" type="button">
+          <span aria-hidden="true">＋</span> Add a task
+        </button>
+        <div class="star-counter" aria-label="Stars earned">
+          <span aria-hidden="true">✦</span>
+          <span id="starCount">0</span>
+          <span>stars</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="planner-overlay" id="plannerOverlay">
+      <section class="planner-card" role="dialog"
+               aria-modal="true" aria-labelledby="plannerTitle">
+        <p class="eyebrow">ONE STEP AT A TIME</p>
+        <h2 id="plannerTitle">A little goal</h2>
+        <p class="planner-description">
+          It doesn't have to be big. Just start somewhere.
+        </p>
+
+        <form id="taskForm">
+          <label for="taskTitle">What would you like to do?</label>
+          <input id="taskTitle" name="taskTitle" type="text"
+                 placeholder="e.g. Read for 30 minutes"
+                 maxlength="100" required />
+
+          <label for="taskTime">When would you like to start?</label>
+          <input id="taskTime" name="taskTime" type="time" required />
+
+          <label for="taskDuration">How long will it take?</label>
+          <select id="taskDuration" name="taskDuration" required>
+            <option value="15">15 minutes</option>
+            <option value="25" selected>25 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">60 minutes</option>
+          </select>
+
+          <p id="formError" class="form-error" role="alert"></p>
+
+          <div class="form-actions">
+            <button id="cancelPlanner" class="secondary-button"
+                    type="button">Maybe later</button>
+            <button class="primary-button" type="submit">
+              Save my goal <span aria-hidden="true">✦</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer class="page-footer">
+    <span>Made for slower, softer days</span>
+    <span aria-hidden="true">✧</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
